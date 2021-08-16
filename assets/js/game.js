@@ -1,12 +1,48 @@
-var playerName = window.prompt("What is your robot's name?")
-// Note the lack of quotation marks around playerName
-console.log(playerName);
-console.log("This logs a string, good for leaving yourself a message");
-console.log(10 + 10);
-console.log("Our robot's name is " + playerName);
-console.log(playerName + " is ready for battle!");
-console.log("Your robot, " + playerName + ", has won!");
-function fight() {
-    window.alert("The fight has begun!")
-}
-//fight();
+var playerName = window.prompt("What is your robot's name?");
+var playerHealth = 100;
+var playerAttack = 10;
+
+console.log(playerName, playerAttack, playerHealth);
+
+var enemyName = "Roborto";
+var enemyHealth = 50;
+var enemyAttack = 12;
+
+var fight = function() {
+    //Alerts players the round has started
+    window.alert("Welcome to Robot Gladiators!");
+
+    //Subtract the value of playerAttack from enemyHealth and use that result to update the value in the `enemyHealth` variable
+    enemyHealth = enemyHealth - playerAttack;
+
+    //Log a resulting message to the console so we know it worked
+    console.log(
+        playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health reamaining."
+    );
+    
+    //Subtract the value of enemyAttack from playerHealth and use that result to update the value in the `playerHealth` variable
+    playerHealth = playerHealth - enemyAttack;
+
+    //Log a resulting message to the console so we know it worked
+    console.log(
+        enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health reamaining."
+    );
+
+    // check player's health
+    if (playerHealth <= 0) {
+        window.alert(playerName + " has died!");
+    }
+    else {
+        window.alert(playerName + " still has " + playerHealth + " health left.")
+    }
+
+    // check enemy's health
+    if (enemyHealth <= 0) {
+        window.alert(enemyName + " has died!");
+    }
+    else {
+        window.alert(enemyName + " still has " + enemyHealth + " health left.")
+    }
+};
+
+fight();
