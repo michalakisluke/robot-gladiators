@@ -29,14 +29,17 @@ var fight = function(enemyName) {
         if (confirmSkip) {
           window.alert(playerName + ' has decided to skip this fight. Goodbye!');
           // subtract money from playerMoney for skipping
-          playerMoney = playerMoney - 10;
+          playerMoney = Math.max(playerMoney - 10);
           console.log("playerMoney", playerMoney)
           break;
         }
       }
   
       // remove enemy's health by subtracting the amount set in the playerAttack variable
-      enemyHealth = enemyHealth - playerAttack;
+      var damage = randomNumber(playerAttack - 3, playerAttack);
+      
+      enemyHealth = Math.max(0,enemyHealth - damage);
+      
       console.log(
         playerName + ' attacked ' + enemyName + '. ' + enemyName + ' now has ' + enemyHealth + ' health remaining.'
       );
@@ -55,7 +58,9 @@ var fight = function(enemyName) {
       }
   
       // remove players's health by subtracting the amount set in the enemyAttack variable
-      playerHealth = playerHealth - enemyAttack;
+      var damage = randomNumber(enemyAttack - 3, enemyAttack);
+      
+      playerHealth = Math.max(0,playerHealth - damage);
       console.log(
         enemyName + ' attacked ' + playerName + '. ' + playerName + ' now has ' + playerHealth + ' health remaining.'
       );
@@ -80,7 +85,7 @@ var startGame = function(){
 
             var pickedEnemyName = enemyNames[i];
 
-            enemyHealth = 50;
+            enemyHealth = randomNumber(40,60);
 
             fight(pickedEnemyName);
 
@@ -137,7 +142,7 @@ var shop = function() {
         case "UPGRADE":
         case "Upgrade":
         case "upgrade":
-            if (playerMoney >= 100) {
+            if (playerMoney >= 7) {
                 window.alert("Upgrading player's attack by 6 for 7 dollars.");
                 playerAttack = playerAttack + 6;
                 playerMoney = playerMoney -7;
@@ -153,6 +158,12 @@ var shop = function() {
             shop();
             break;
     }
+  };
+
+  var randomNumber = function(min,max) {
+      var value = Math.floor(Math.random() * (min - max + 1) + min);
+
+      return value;
   };
 
 startGame();
